@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🏃 Entraînements</h1>
+<a href="{{ url_for('ajouter_entrainement') }}">+ Nouvel entraînement</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th><th>Équipe</th><th>Lieu</th>
+            <th>Durée</th><th>Thème</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in entrainements %}
+        <tr>
+            <td>{{ e.date_seance }}</td>
+            <td>{{ e.equipe_nom }}</td>
+            <td>{{ e.lieu }}</td>
+            <td>{{ e.duree }} min</td>
+            <td>{{ e.theme }}</td>
+            <td>
+                <a href="{{ url_for('saisir_presences', id=e.id_entrainement) }}">Présences</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6">Aucun entraînement</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

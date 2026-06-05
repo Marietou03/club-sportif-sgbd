@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🏠 Tableau de bord</h1>
+
+<div class="stats">
+    <div class="card">
+        <h2>{{ membres_actifs }}</h2>
+        <p>Membres actifs</p>
+    </div>
+    <div class="card alerte">
+        <h2>{{ cotisations_impayees }}</h2>
+        <p>Cotisations impayées</p>
+    </div>
+</div>
+
+<h3>📅 Prochaines compétitions</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th><th>Sport</th><th>Date</th>
+            <th>Lieu</th><th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in competitions %}
+        <tr>
+            <td>{{ c.nom }}</td>
+            <td>{{ c.sport_nom }}</td>
+            <td>{{ c.date }}</td>
+            <td>{{ c.lieu }}</td>
+            <td>{{ c.type }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">Aucune compétition à venir</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

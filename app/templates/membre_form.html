@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>➕ Ajouter un membre</h1>
+
+<form method="POST">
+    <label>Numéro de licence :<br>
+        <input type="text" name="num_licence" required>
+    </label><br><br>
+
+    <label>Nom :<br>
+        <input type="text" name="nom" required>
+    </label><br><br>
+
+    <label>Prénom :<br>
+        <input type="text" name="prenom" required>
+    </label><br><br>
+
+    <label>Date de naissance :<br>
+        <input type="date" name="date_naissance" required>
+    </label><br><br>
+
+    <label>Téléphone :<br>
+        <input type="text" name="telephone">
+    </label><br><br>
+
+    <label>Email :<br>
+        <input type="email" name="email">
+    </label><br><br>
+
+    <button type="submit">✅ Enregistrer</button>
+    <a href="{{ url_for('membres') }}">❌ Annuler</a>
+</form>
+{% endblock %}

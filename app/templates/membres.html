@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>👥 Membres du club</h1>
+<a href="{{ url_for('ajouter_membre') }}">+ Ajouter un membre</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Licence</th><th>Nom</th><th>Prénom</th>
+            <th>Email</th><th>Téléphone</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for m in membres %}
+        <tr>
+            <td>{{ m.num_licence }}</td>
+            <td>{{ m.nom }}</td>
+            <td>{{ m.prenom }}</td>
+            <td>{{ m.email }}</td>
+            <td>{{ m.telephone }}</td>
+            <td>
+                <a href="{{ url_for('fiche_membre', id=m.num_licence) }}">Voir fiche</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6">Aucun membre trouvé</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

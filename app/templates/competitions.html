@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🏆 Compétitions</h1>
+<a href="{{ url_for('ajouter_competition') }}">+ Nouvelle compétition</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th><th>Sport</th><th>Date</th>
+            <th>Lieu</th><th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in competitions %}
+        <tr>
+            <td>{{ c.nom }}</td>
+            <td>{{ c.sport_nom }}</td>
+            <td>{{ c.date_comp }}</td>
+            <td>{{ c.lieu }}</td>
+            <td>{{ c.type_comp }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">Aucune compétition</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

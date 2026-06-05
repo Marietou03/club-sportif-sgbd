@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📋 Fiche de {{ membre.nom }} {{ membre.prenom }}</h1>
+
+<h3>Informations personnelles</h3>
+<p><strong>Licence :</strong> {{ membre.num_licence }}</p>
+<p><strong>Date de naissance :</strong> {{ membre.date_naissance }}</p>
+<p><strong>Téléphone :</strong> {{ membre.telephone }}</p>
+<p><strong>Email :</strong> {{ membre.email }}</p>
+<p><strong>Date d'adhésion :</strong> {{ membre.date_adhesion }}</p>
+
+<h3>Équipe(s)</h3>
+<table>
+    <thead><tr><th>Sport</th><th>Équipe</th><th>Poste</th></tr></thead>
+    <tbody>
+        {% for e in equipes %}
+        <tr>
+            <td>{{ e.sport }}</td>
+            <td>{{ e.equipe }}</td>
+            <td>{{ e.poste }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3">Aucune équipe</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Assiduité</h3>
+{% if assiduite.total and assiduite.total > 0 %}
+<p>{{ assiduite.presences }} présences sur {{ assiduite.total }} entraînements
+   ({{ ((assiduite.presences / assiduite.total) * 100) | round(1) }}%)</p>
+{% else %}
+<p>Aucun entraînement enregistré</p>
+{% endif %}
+
+<h3>Cotisations</h3>
+<table>
+    <thead><tr><th>Saison</th><th>Montant</th><th>Statut</th><th>Date paiement</th></tr></thead>
+    <tbody>
+        {% for c in cotisations %}
+        <tr>
+            <td>{{ c.saison }}</td>
+            <td>{{ c.montant }} FCFA</td>
+            <td>{{ c.statut }}</td>
+            <td>{{ c.date_paiement or '-' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">Aucune cotisation</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br><a href="{{ url_for('membres') }}">← Retour</a>
+{% endblock %}

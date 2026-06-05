@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>➕ Nouvel entraînement</h1>
+
+<form method="POST">
+    <label>Équipe :<br>
+        <select name="equipe" required>
+            {% for e in equipes %}
+            <option value="{{ e.code }}">{{ e.nom }}</option>
+            {% endfor %}
+        </select>
+    </label><br><br>
+
+    <label>Date :<br>
+        <input type="date" name="date" required>
+    </label><br><br>
+
+    <label>Heure de début :<br>
+        <input type="time" name="heure_debut" required>
+    </label><br><br>
+
+    <label>Durée (minutes) :<br>
+        <input type="number" name="duree" min="1" required>
+    </label><br><br>
+
+    <label>Lieu :<br>
+        <input type="text" name="lieu" required>
+    </label><br><br>
+
+    <label>Thème :<br>
+        <input type="text" name="theme">
+    </label><br><br>
+
+    <button type="submit">✅ Créer et saisir les présences</button>
+    <a href="{{ url_for('entrainements') }}">❌ Annuler</a>
+</form>
+{% endblock %}

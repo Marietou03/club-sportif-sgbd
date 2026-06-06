@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Cotisations 2025-2026</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Membre</th><th>Montant</th>
+            <th>Statut</th><th>Date paiement</th><th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in cotisations %}
+        <tr>
+            <td>{{ c.nom }} {{ c.prenom }}</td>
+            <td>{{ c.montant }} FCFA</td>
+            <td>
+                {% if c.statut == 'impayee' %}
+                <span style="color:red">⚠ Impayée</span>
+                {% else %}
+                <span style="color:green">✅ Payée</span>
+                {% endif %}
+            </td>
+            <td>{{ c.date_paiement or '-' }}</td>
+            <td>
+                {% if c.statut == 'impayee' %}
+                <form method="POST"
+                      action="{{ url_for('payer_cotisation', membre_id=c.numero_licence) }}">
+                    <button type="submit">Marquer payée</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">Aucune cotisation</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

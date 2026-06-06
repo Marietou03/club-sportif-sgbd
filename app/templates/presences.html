@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Présences — {{ entrainement.equipe_nom }}</h1>
+<p>Date : {{ entrainement.date }} | Lieu : {{ entrainement.lieu }}</p>
+
+<form method="POST">
+    <table>
+        <thead>
+            <tr>
+                <th>Présent</th><th>Nom</th><th>Prénom</th><th>Motif d'absence</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in membres %}
+            <tr>
+                <td>
+                    <input type="checkbox" name="presents"
+                           value="{{ m.numero_licence }}">
+                </td>
+                <td>{{ m.nom }}</td>
+                <td>{{ m.prenom }}</td>
+                <td>
+                    <input type="text" name="motif_{{ m.numero_licence }}"
+                           placeholder="Si absent...">
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4">Aucun membre dans cette équipe</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <button type="submit">✅ Enregistrer les présences</button>
+</form>
+{% endblock %}

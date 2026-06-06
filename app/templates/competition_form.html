@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Nouvelle compétition</h1>
+
+<form method="POST">
+    <label>Nom :<br>
+        <input type="text" name="nom" required>
+    </label><br><br>
+
+    <label>Sport :<br>
+        <select name="sport" required>
+            {% for s in sports %}
+            <option value="{{ s.id }}">{{ s.nom }}</option>
+            {% endfor %}
+        </select>
+    </label><br><br>
+
+    <label>Date :<br>
+        <input type="date" name="date" required>
+    </label><br><br>
+
+    <label>Lieu :<br>
+        <input type="text" name="lieu" required>
+    </label><br><br>
+
+    <label>Type :<br>
+        <select name="type">
+            <option value="championnat">Championnat</option>
+            <option value="coupe">Coupe</option>
+            <option value="amical">Amical</option>
+        </select>
+    </label><br><br>
+
+    <button type="submit">✅ Créer</button>
+    <a href="{{ url_for('competitions') }}">❌ Annuler</a>
+</form>
+{% endblock %}
